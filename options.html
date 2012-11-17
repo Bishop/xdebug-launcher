@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Xdebug Opera extension options page</title>
+
+	<style>
+	html {
+		font-family: Segoe UI, Tahoma;
+		background-color: gray;
+	}
+	#wrapper {
+		margin: 0 auto;
+		width: 700px;
+		background-color: white;
+		padding: 10px 20px;
+		border-radius: 20px;
+		margin-top: 25px;
+		box-shadow: 0 0 7px 7px #555;
+	}
+	
+	li {
+		list-style: none;
+	}
+	label, select {
+		display: block;
+	}
+	input[type=text], select {
+		font-family: Consolas, Courier New, Monospace;
+		width: 300px;
+	}
+	input[type=text] {
+		margin-bottom: 1em;
+	}
+	
+	p.small {
+		font-size: xx-small;
+		color: gray;
+		font-italic: italic;
+		margin-top: -1.5em;
+	}
+
+	</style>
+	<script type="text/javascript">
+		var urls = [];
+		var fillHosts = function() {
+			urls = widget.preferences["urls"].split(";");
+
+			var html = "";
+			for (var i = 0; i < urls.length; i++) {
+				html += ["<option>", urls[i], "</option>"].join("");
+			}
+			
+			document.getElementById("urls").innerHTML = html;
+		}
+		
+		var fillSession = function() {
+			document.getElementById("session").value = widget.preferences.session;
+		}
+		
+		var init = function() {
+			fillHosts();
+			fillSession();
+			document.getElementById("session").addEventListener("change", function(event) {
+				if (this.value) {
+					widget.preferences.session = this.value;
+				}
+			}, false);
+			document.getElementById("buttonAdd").addEventListener("click", function(event) {
+				var edit = document.getElementById("url");
+				if (edit.value && urls.indexOf(edit.value) < 0) {
+					urls.push(edit.value);
+					widget.preferences.urls = urls.join(";");
+					fillHosts();
+					edit.value = "";
+				}
+			}, false);
+			document.getElementById("buttonRemove").addEventListener("click", function(event) {
+				var list = document.getElementById("urls");
+
+				if (list.selectedOptions.length) {
+					for (var i = 0; i < list.selectedOptions.length; i++) {
+						var n = urls.indexOf(list.selectedOptions[i].value);
+						if (n >= 0) {
+							urls.splice(n, 1);
+						}
+					}
+					widget.preferences.urls = urls.join(";");
+					fillHosts();
+				}
+			}, false);
+		}
+	</script>
+</head>
+<body onload="init()">
+
+	<div id="wrapper"> 
+		<h1>Xdebug Opera extension options page</h1> 
+		<form>
+
+			<ul>
+				<li>
+					<label for="session">Session name:</label>
+					<input type="text" name="session" value="" id="session"/>
+				</li>
+				<li>
+					<label for="url">Add Host (regexp):</label>
+					<input type="text" name="url" id="url"/>
+					<input type="button" id="buttonAdd" value="Add"/>
+					<p class="small">Example: example.com, localhost, my(project|site)\.loc</p>
+					<label for="urls">Hosts:</label>
+					<select size="15" name="urls" id="urls" multiple="multiple" /></select>
+					<input type="button" id="buttonRemove" value="Remove"/>
+				</li>
+			</ul>
+
+		</form> 
+	</div>
+</body>
+</html>

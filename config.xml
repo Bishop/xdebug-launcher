@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+		id="xdebug_helper"
+		version="1.1">
+	<name short="Xdebug" xml:lang="en">Xdebug launcher</name>
+	<name short="Xdebug" xml:lang="ru">Запуск отладчика Xdebug</name>
+	<description xml:lang="en">An extension for PHP developers, which adds ability to start a Xdebug session from Opera.</description>
+	<author email="al.prudnikov@gmail.com">Alexandr Prudnikov</author>
+	<icon src="xdebug.png" width="64" height="64"/>
+	<icon src="icon_toolbar.png" width="18" height="18"/>
+
+	<preference name="urls" value="localhost"/>
+	<preference name="session" value="ECLIPSE_DBGP"/>
+	
+	<license href="https://addons.opera.com/developer/license/hosting/">Opera hosting license. Copyright 2011 Alexandr Prudnikov. Icons by Anastasia Streltsova.</license>
+</widget>
