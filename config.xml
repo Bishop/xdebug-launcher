@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets"
 		id="xdebug_helper"
-		version="1.1">
+		version="1.2">
 	<name short="Xdebug" xml:lang="en">Xdebug launcher</name>
 	<name short="Xdebug" xml:lang="ru">Запуск отладчика Xdebug</name>
 	<description xml:lang="en">An extension for PHP developers, which adds ability to start a Xdebug session from Opera.</description>
